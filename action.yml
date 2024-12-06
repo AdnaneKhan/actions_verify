@@ -101,16 +101,16 @@ runs:
         fetch-depth: 0
 
     # PR Summary -------------------------------------------------------------------------------------------------------
-    - name: PR Summary
-      if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && inputs.summary == 'true' && github.event.action != 'synchronize'
-      env:
-        GITHUB_TOKEN: ${{ inputs.token }}
-        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
-        OPENAI_MODEL: ${{ inputs.openai_model }}
-      run: |
-        ultralytics-actions-summarize-pr
-      shell: bash
-      continue-on-error: true
+    # - name: PR Summary
+    #   if: (github.event_name == 'pull_request' || github.event_name == 'pull_request_target') && inputs.summary == 'true' && github.event.action != 'synchronize'
+    #   env:
+    #     GITHUB_TOKEN: ${{ inputs.token }}
+    #     OPENAI_API_KEY: ${{ inputs.openai_api_key }}
+    #     OPENAI_MODEL: ${{ inputs.openai_model }}
+    #   run: |
+    #     ultralytics-actions-summarize-pr
+    #   shell: bash
+    #   continue-on-error: true
 
     # Python formatting ------------------------------------------------------------------------------------------------
     # Ignores the following Docs rules to match Google-style docstrings:
@@ -196,18 +196,18 @@ runs:
       continue-on-error: true
 
     # Autolabel Issues and PRs (run before commit changes in case commit fails) ----------------------------------------
-    - name: Autolabel Issues and PRs
-      if: inputs.labels == 'true' && (github.event.action == 'opened' || github.event.action == 'created')
-      env:
-        GITHUB_TOKEN: ${{ inputs.token }}
-        FIRST_ISSUE_RESPONSE: ${{ inputs.first_issue_response }}
-        FIRST_PR_RESPONSE: ${{ inputs.first_pr_response }}
-        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
-        OPENAI_MODEL: ${{ inputs.openai_model }}
-      run: |
-        ultralytics-actions-first-interaction
-      shell: bash
-      continue-on-error: true
+    # - name: Autolabel Issues and PRs
+    #   if: inputs.labels == 'true' && (github.event.action == 'opened' || github.event.action == 'created')
+    #   env:
+    #     GITHUB_TOKEN: ${{ inputs.token }}
+    #     FIRST_ISSUE_RESPONSE: ${{ inputs.first_issue_response }}
+    #     FIRST_PR_RESPONSE: ${{ inputs.first_pr_response }}
+    #     OPENAI_API_KEY: ${{ inputs.openai_api_key }}
+    #     OPENAI_MODEL: ${{ inputs.openai_model }}
+    #   run: |
+    #     ultralytics-actions-first-interaction
+    #   shell: bash
+    #   continue-on-error: true
 
     # Commit Changes ---------------------------------------------------------------------------------------------------
     - name: Commit and Push Changes
